@@ -11,19 +11,32 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     private int count;
     private int numPickups = 8;
+    private Vector3 prevPlayerPos;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI winText;
+    public TextMeshProUGUI PlayerPosition;
+    public TextMeshProUGUI PlayerVelocity;
+
+
+
 
     void Start() {
         count = 0;
         winText.text = "";
         SetCountText();
+        prevPlayerPos = transform.position;
     }
 
     void FixedUpdate() {
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
 
         GetComponent<Rigidbody>().AddForce(movement * speed * Time.fixedDeltaTime);
+
+        Vector3 curPlayerPos = transform.position;
+        PlayerPosition.text = "Position: " + curPlayerPos.ToString();
+        Vector3 velocity = (curPlayerPos - prevPlayerPos) / Time.fixedDeltaTime;
+        PlayerVelocity.text = "Velocity: " + velocity.ToString() + " Speed: " + velocity.magnitude.ToString();
+        prevPlayerPos = curPlayerPos;
     }
 
     void OnMove(InputValue value) {
