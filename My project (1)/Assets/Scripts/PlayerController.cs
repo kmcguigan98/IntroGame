@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour {
     private Vector3 prevPlayerPos;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI winText;
-    public TextMeshProUGUI PlayerPosition;
-    public TextMeshProUGUI PlayerVelocity;
 
 
 
@@ -32,11 +30,7 @@ public class PlayerController : MonoBehaviour {
 
         GetComponent<Rigidbody>().AddForce(movement * speed * Time.fixedDeltaTime);
 
-        Vector3 curPlayerPos = transform.position;
-        PlayerPosition.text = "Position: " + curPlayerPos.ToString();
-        Vector3 velocity = (curPlayerPos - prevPlayerPos) / Time.fixedDeltaTime;
-        PlayerVelocity.text = "Velocity: " + velocity.ToString() + " Speed: " + velocity.magnitude.ToString();
-        prevPlayerPos = curPlayerPos;
+        
     }
 
     void OnMove(InputValue value) {
